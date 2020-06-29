@@ -2,7 +2,6 @@
 
  import android.os.Bundle;
 
- import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.Service;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.Question;
  import com.techyourchance.journeytodependencyinjection.screens.common.activities.BaseActivity;
@@ -13,21 +12,29 @@
 
  import java.util.List;
 
+ import javax.inject.Inject;
+
  public class QuestionsListActivity extends BaseActivity implements
          QuestionsListViewMvc.Listener, FetchQuestionsListUseCase.Listener {
 
      private static final int NUM_OF_QUESTIONS_TO_FETCH = 20;
 
-     @Service private FetchQuestionsListUseCase mFetchQuestionsListUseCase;
-     @Service private DialogsManager mDialogsManager;
-     @Service private ViewMvcFactory mViewMvcFactory;
+     // old using reflection
+//     @Service private FetchQuestionsListUseCase mFetchQuestionsListUseCase;
+//     @Service private DialogsManager mDialogsManager;
+//     @Service private ViewMvcFactory mViewMvcFactory;
+
+     // using @Inject for Dagger2 to work correctly
+     @Inject FetchQuestionsListUseCase mFetchQuestionsListUseCase;
+     @Inject DialogsManager mDialogsManager;
+     @Inject ViewMvcFactory mViewMvcFactory;
 
      private QuestionsListViewMvc mViewMvc;
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
-         getInjector().inject(this);
+         getPresentationComponent().inject(this);
 
          mViewMvc = mViewMvcFactory.newInstance(QuestionsListViewMvc.class, null);
 

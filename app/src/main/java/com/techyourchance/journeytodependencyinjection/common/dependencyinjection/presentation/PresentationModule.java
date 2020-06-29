@@ -20,11 +20,9 @@ public class PresentationModule {
 
     // Bootstrap dependency for the services inside PresentationModule
     private final FragmentActivity mActivity;
-    private final ApplicationComponent mApplicationComponent;
 
-    public PresentationModule(FragmentActivity mFragmentActivity, ApplicationComponent mApplicationComponent) {
+    public PresentationModule(FragmentActivity mFragmentActivity) {
         this.mActivity = mFragmentActivity;
-        this.mApplicationComponent = mApplicationComponent;
     }
 
     @Provides
@@ -47,15 +45,16 @@ public class PresentationModule {
         return new DialogsManager(getFragmentManager());
     }
 
-    @Provides
-    FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase() {
-        return mApplicationComponent.getFetchQuestionDetailsUseCase();
-    }
-
-    @Provides
-    FetchQuestionsListUseCase getFetchQuestionsListUseCase() {
-        return mApplicationComponent.getFetchQuestionsListUseCase();
-    }
+    // get rid of application component delegation methods
+//    @Provides
+//    FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase() {
+//        return mApplicationComponent.getFetchQuestionDetailsUseCase();
+//    }
+//
+//    @Provides
+//    FetchQuestionsListUseCase getFetchQuestionsListUseCase() {
+//        return mApplicationComponent.getFetchQuestionsListUseCase();
+//    }
 
     @Provides
     ViewMvcFactory getViewMvcFactory() {

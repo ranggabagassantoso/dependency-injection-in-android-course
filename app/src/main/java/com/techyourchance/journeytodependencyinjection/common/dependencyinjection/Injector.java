@@ -1,5 +1,6 @@
 package com.techyourchance.journeytodependencyinjection.common.dependencyinjection;
 
+import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationComponent;
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
 import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
@@ -11,10 +12,17 @@ import java.lang.reflect.Modifier;
 
 public class Injector {
 
-    private final PresentationCompositionRoot mPresentationCompositionRoot;
+    // old
+    //private final PresentationCompositionRoot mPresentationCompositionRoot;
+    //    public Injector(PresentationCompositionRoot presentationCompositionRoot) {
+    //        mPresentationCompositionRoot = presentationCompositionRoot;
+    //    }
 
-    public Injector(PresentationCompositionRoot presentationCompositionRoot) {
-        mPresentationCompositionRoot = presentationCompositionRoot;
+    // new
+    private final PresentationComponent mPresentationCompositionRoot;
+
+    public Injector(PresentationComponent mPresentationCompositionRoot) {
+        this.mPresentationCompositionRoot = mPresentationCompositionRoot;
     }
 
     public void inject(Object client) {
